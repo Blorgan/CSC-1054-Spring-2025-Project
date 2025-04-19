@@ -1,6 +1,6 @@
 /*CSC 1054 Spring 2025 Project
 DrawableObject class. Both the player and the mines inherit from this class
-Blake Morgan 13-Apr-2025
+Blake Morgan 18-Apr-2025
 */
 
 import javafx.scene.paint.*;
@@ -20,16 +20,13 @@ public abstract class DrawableObject
    
    //takes the position of the player and calls draw me with appropriate positions
    public void draw(float playerx, float playery, GraphicsContext gc, boolean isPlayer)
-   {
-      //the 300,300 places the player at 300,300, if you want to change it you will have to modify it here
-      
+   {  
       if(isPlayer)
          drawMe(playerx,playery,gc);
       else
          drawMe(-playerx+300+x,-playery+300+y,gc);
    }
    
-   //this method you implement for each object you want to draw. Act as if the thing you want to draw is at x,y.
    //NOTE: DO NOT CALL DRAWME YOURSELF. Let the the "draw" method do it for you. I take care of the math in that method for a reason.
    public abstract void drawMe(float x, float y, GraphicsContext gc);
    public void act()
@@ -45,4 +42,13 @@ public abstract class DrawableObject
    {
       return (Math.sqrt((other.x-x)*(other.x-x) + (other.y-y)*(other.y-y)));
    }
+   
+   //added a distance to point method so I wouldn't need to create extra dummy objects in the main program
+   //when measuring and calculating the grid for spawning mines
+   public double distanceToPoint(float x, float y)
+   {
+       float dx = this.getX() - x;
+       float dy = this.getY() - y;
+       return Math.sqrt(dx * dx + dy * dy);
+   }   
 }

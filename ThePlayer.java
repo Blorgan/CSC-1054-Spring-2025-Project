@@ -21,11 +21,17 @@ public class ThePlayer extends DrawableObject
    public void drawMe(float x, float y, GraphicsContext gc)
    {
       gc.setFill(Color.BLACK);
-      gc.fillOval(x-14, y-14, 35, 35);
+      gc.fillOval(x-14, y-14, 36, 36);
       gc.setFill(Color.GRAY);
-      gc.fillOval(x-13, y-13, 33, 33);
+      gc.fillOval(x-13, y-13, 34, 34);
+      gc.setFill(Color.BLACK);
+      gc.fillOval(x-6, y-6, 20, 20);
+      gc.setFill(Color.LEMONCHIFFON);
+      gc.fillOval(x-5, y-5, 18, 18);       
    }
    
+   //methods to apply force to both the x and y directions
+   //capping this force at 5 in either direction
    public void applyForceX(float value) 
    {
       forceX += value;
@@ -40,6 +46,8 @@ public class ThePlayer extends DrawableObject
       if (forceY < -5) forceY = -5;
    }
    
+   //methods to apply decay to the force variables
+   //if force is under 0.25, set it to 0
    public void applyDecayX() 
    {
       if (Math.abs(forceX) < 0.25f)
@@ -72,6 +80,7 @@ public class ThePlayer extends DrawableObject
       }
    }
    
+   //method to update the players position
    public void updatePosition() 
    {
       setX(getX() + forceX);
